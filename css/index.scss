@@ -1,0 +1,73 @@
+@import "lib/_mixins.scss";
+
+$scale: 0.5;
+
+body {
+  background: #2E73FB
+}
+
+.layout {
+  width: 3200px * $scale;
+  margin: 0 auto;
+  position: relative;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 0 7.8% 5.37% 7.8%;
+}
+
+.event-title {
+  font-size: 42px;
+  color: #fff;
+}
+
+.page-title {
+  font-size: 90px;
+  color: #fff;
+}
+
+.mbd-ranking-list {
+  overflow-y: auto;
+  color: #fff;
+  height: 81%;
+
+  .mbd-ranking-item {
+    background: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 165px;
+    position: relative;
+    border-radius: 180px;
+  }
+
+  .mbd-ranking-avatar {
+    display: inline-block;
+    vertical-align: middle;
+    width: 146px;
+    height: 149px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 8px solid rgba(0, 0, 0, 0.2);
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .mbd-ranking-name {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 72px * $scale;
+  }
+
+  .mbd-ranking-time {
+    display: inline-block;
+  }
+
+  .mbd-ranking-gift {
+    display: inline-block;
+  }
+}
