@@ -1,55 +1,96 @@
 @import "lib/_mixins.scss";
 
-$scale: 0.5;
+// width 1152px
+
+@media all and (min-width: 1280px) {
+  html {
+    font-size: 30px;
+  }
+}
 
 body {
   background: #2E73FB
 }
 
-.layout {
-  width: 3200px * $scale;
+.container {
+  width: 32rem;
   margin: 0 auto;
   position: relative;
 }
 
-.container {
-  width: 100%;
-  height: 100%;
-  padding: 0 7.8% 5.37% 7.8%;
-}
-
 .event-title {
-  font-size: 42px;
+  font-size: .42rem;
   color: #fff;
+  margin-bottom: .2rem;
 }
 
 .page-title {
-  font-size: 90px;
+  font-size: .9rem;
   color: #fff;
 }
 
-.mbd-ranking-list {
-  overflow-y: auto;
-  color: #fff;
-  height: 81%;
+.title-wrap {
+  margin: .8rem 0 .66rem;
+  position: relative;
+}
 
+.logo {
+  position: absolute;
+  width: 5.37rem;
+  height: 1.25rem;
+  background: url("../img/logo.png") no-repeat;
+  background-size: contain;
+  right: 0; bottom: 0;
+}
+
+.mbd-ranking-wrap {
+
+}
+.mbd-ranking-list {
+  // height: 1.77rem * 10;
+  // overflow-y: auto;
   .mbd-ranking-item {
-    background: rgba(0, 0, 0, 0.3);
-    width: 100%;
-    height: 165px;
+    width: 32rem;
+    height: 1.65rem;
     position: relative;
-    border-radius: 180px;
+    color: #fff;
+    margin-bottom: .12rem;
+
+    &:nth-child(odd) {
+      .mbd-ranking-resl {
+        background: rgba(0, 0, 0, 0.05);
+      }
+    }
+    &:nth-child(even) {
+      .mbd-ranking-resl {
+        background: rgba(0, 0, 255, 0.2);
+      }
+    }
+  }
+
+  .mbd-ranking-resl {
+    height: 100%;
+    font-size: .72rem;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    width: 0;
+    animation: itAmt 1.6s ease-in-out both;
+    position: relative;
+    z-index: 5;
   }
 
   .mbd-ranking-avatar {
-    display: inline-block;
-    vertical-align: middle;
-    width: 146px;
-    height: 149px;
+    position: absolute;
+    width: 1.57rem;
+    height: 1.57rem;
     border-radius: 50%;
     overflow: hidden;
-    border: 8px solid rgba(0, 0, 0, 0.2);
+    border: 0.08rem solid rgba(0, 0, 0, 0.2);
+    margin-right: .45rem;
+    z-index: 10;
 
+    transform: scale(0);
+    animation: avtAmt 800ms ease-in-out both;
     img {
       display: block;
       width: 100%;
@@ -58,16 +99,50 @@ body {
   }
 
   .mbd-ranking-name {
-    display: inline-block;
-    font-weight: bold;
-    font-size: 72px * $scale;
+    @extend %text-overflow;
+    position: absolute;
+    left: 2.1rem;
+    width: 16rem;
+    line-height: 1.73rem;
   }
 
   .mbd-ranking-time {
-    display: inline-block;
+    position: absolute;
+    left: 18.1rem;
+    width: 3rem;
+    line-height: 1.73rem;
   }
 
   .mbd-ranking-gift {
-    display: inline-block;
+    position: absolute;
+    left: 25.42rem;
+    line-height: 1.73rem;
+  }
+}
+
+@keyframes avtAmt {
+  0% {
+    transform: scale(0);
+  }
+  90% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes itAmt {
+  0% {
+    width: 0;
+  }
+  60% {
+    width: 0;
+  }
+  85% {
+    width: 110%;
+  }
+  100% {
+    width: 100%;
   }
 }
