@@ -1,4 +1,4 @@
-.mbd-ranking-list .mbd-ranking-name {
+.mbd-score-list .mbd-score-name {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -6,66 +6,98 @@
   word-wrap: normal;
 }
 
-@media all and (min-width: 1280px) {
+@media all and (min-width: 1152px) {
   html {
     font-size: 30px;
   }
 }
 
-body {
-  background: #2E73FB;
+@media all and (min-width: 1536px) {
+  html {
+    font-size: 40px;
+  }
 }
 
-.container {
-  width: 32rem;
-  margin: 0 auto;
+@media all and (min-width: 1920px) {
+  html {
+    font-size: 50px;
+  }
+}
+
+.bg-video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.left-cont {
+  display: inline-block;
+  vertical-align: top;
+  width: 25.16rem;
+  padding-left: 2.6rem;
+  margin-right: 1.6rem;
+}
+
+.left-cont .title-wrap {
+  margin-bottom: 1.33rem;
+  padding: 1.59rem 0 0 .2rem;
   position: relative;
 }
 
-.event-title {
-  font-size: .42rem;
-  color: #fff;
-  margin-bottom: .2rem;
-}
-
-.page-title {
-  font-size: .9rem;
-  color: #fff;
-}
-
-.title-wrap {
-  margin: .8rem 0 .66rem;
-  position: relative;
-}
-
-.logo {
-  position: absolute;
-  width: 5.37rem;
-  height: 1.25rem;
+.left-cont .logo {
+  display: inline-block;
+  width: 8.97rem;
+  height: 1.29rem;
   background: url("../img/logo.png") no-repeat;
   background-size: contain;
-  right: 0;
-  bottom: 0;
 }
 
-.mbd-ranking-list .mbd-ranking-item {
-  width: 32rem;
+.left-cont .title-latest-score {
+  font-size: .9rem;
+  color: #fff;
+  float: right;
+  line-height: 1.3rem;
+  padding-right: 1rem;
+}
+
+.right-cont {
+  display: inline-block;
+  vertical-align: top;
+  width: 8rem;
+  padding-top: 1.59rem;
+}
+
+.right-cont .title-wrap {
+  text-align: center;
+  margin-bottom: 1.72rem;
+}
+
+.right-cont .title-latest-onbaord {
+  font-size: .9rem;
+  color: #fff;
+  line-height: 1.3rem;
+  display: inline-block;
+}
+
+.mbd-score-list .mbd-score-item {
+  width: 25.16rem;
   height: 1.65rem;
   position: relative;
   color: #fff;
-  margin-bottom: .12rem;
+  margin-bottom: .22rem;
 }
 
-.mbd-ranking-list .mbd-ranking-item:nth-child(odd) .mbd-ranking-resl {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.mbd-ranking-list .mbd-ranking-item:nth-child(even) .mbd-ranking-resl {
-  background: rgba(0, 0, 255, 0.2);
-}
-
-.mbd-ranking-list .mbd-ranking-resl {
+.mbd-score-list .mbd-score-resl {
   height: 100%;
+  background: rgba(0, 0, 0, 0.1);
   font-size: .72rem;
   border-radius: 1.5rem;
   overflow: hidden;
@@ -76,7 +108,7 @@ body {
   z-index: 5;
 }
 
-.mbd-ranking-list .mbd-ranking-avatar {
+.mbd-score-list .mbd-score-avatar {
   position: absolute;
   width: 1.57rem;
   height: 1.57rem;
@@ -92,30 +124,80 @@ body {
           animation: avtAmt 800ms ease-in-out both;
 }
 
-.mbd-ranking-list .mbd-ranking-avatar img {
+.mbd-score-list .mbd-score-avatar img {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.mbd-ranking-list .mbd-ranking-name {
+.mbd-score-list .mbd-score-name {
   position: absolute;
   left: 2.1rem;
-  width: 16rem;
+  width: 9.5rem;
   line-height: 1.73rem;
 }
 
-.mbd-ranking-list .mbd-ranking-time {
+.mbd-score-list .mbd-score-time {
   position: absolute;
-  left: 18.1rem;
+  left: 11.6rem;
   width: 3rem;
   line-height: 1.73rem;
 }
 
-.mbd-ranking-list .mbd-ranking-gift {
+.mbd-score-list .mbd-score-gift {
   position: absolute;
-  left: 25.42rem;
+  left: 19.2rem;
   line-height: 1.73rem;
+}
+
+.mbd-newest-list .mbd-newest-item {
+  width: 8rem;
+  height: 2.62rem;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 1.5rem;
+  position: relative;
+  margin-bottom: 1.26rem;
+}
+
+.mbd-newest-list .mbd-newest-avatar {
+  display: inline-block;
+  vertical-align: top;
+  width: 2.92rem;
+  height: 2.92rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 0.08rem solid rgba(0, 0, 0, 0.2);
+  margin: -0.15rem 0.6rem 0 0;
+}
+
+.mbd-newest-list .mbd-newest-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mbd-newest-list .mbd-newest-crown {
+  position: absolute;
+  width: 1.97rem;
+  height: 1.04rem;
+  background: url("../img/avatar-crown.png") no-repeat;
+  background-size: contain;
+  top: -.76rem;
+  left: 0;
+}
+
+.mbd-newest-list .mbd-newest-resl {
+  display: inline-block;
+  vertical-align: top;
+  color: #fff;
+}
+
+.mbd-newest-list .mbd-newest-name {
+  font-size: .95rem;
+}
+
+.mbd-newest-list .mbd-newest-time {
+  font-size: .72rem;
 }
 
 @-webkit-keyframes avtAmt {
@@ -149,10 +231,7 @@ body {
 }
 
 @-webkit-keyframes itAmt {
-  0% {
-    width: 0;
-  }
-  60% {
+  0%, 60% {
     width: 0;
   }
   85% {
@@ -164,10 +243,7 @@ body {
 }
 
 @keyframes itAmt {
-  0% {
-    width: 0;
-  }
-  60% {
+  0%, 60% {
     width: 0;
   }
   85% {
