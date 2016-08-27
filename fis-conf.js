@@ -4,7 +4,7 @@ fis.set("atm", {
     useHash: false, // 是否给文件名加上hash值
     useDomain: false,  // 是否使用CDN路径
     userName: 'keithytsai',  // RTX用户名
-    projectName: 'design-wk', // 项目名称
+    projectName: 'designwk', // 项目名称
     wapstatic: 'http://wapstatic.kf0309.3g.qq.com/', // 默认测试环境网页访问地址
     cdnPath: '/2015/market/allanyu' // 上传到CDN的路径, 类似于/2015/market/allanyu, 注意: 必须从/MIG-WEB的子目录开始
 });

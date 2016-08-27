@@ -25,7 +25,7 @@ gulp.task('upload', function() {
     .pipe(upload({
       url: 'http://wapstatic.kf0309.3g.qq.com/receiver/receiver2.php',
       data: {
-        to: '/data/wapstatic/keithytsai/open_zc'
+        to: '/data/wapstatic/keithytsai/designwk'
       }
     })
   );
@@ -36,7 +36,7 @@ gulp.task('uploadCss', function() {
     .pipe(upload({
       url: 'http://wapstatic.kf0309.3g.qq.com/receiver/receiver2.php',
       root: 'publish', // for multiple files
-      remotePath: '/data/wapstatic/keithytsai/open_zc'
+      remotePath: '/data/wapstatic/keithytsai/designwk'
     })
   );
 });

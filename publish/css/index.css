@@ -1,4 +1,4 @@
-.mbd-score-list .mbd-score-name {
+.mbd-score-list .mbd-score-name, .mbd-best-list .mbd-best-name {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -6,19 +6,25 @@
   word-wrap: normal;
 }
 
-@media all and (min-width: 1152px) {
+@media (min-width: 1152px) {
   html {
     font-size: 30px;
   }
 }
 
-@media all and (min-width: 1536px) {
+@media (min-width: 1536px) {
   html {
     font-size: 40px;
   }
 }
 
-@media all and (min-width: 1920px) {
+@media (min-width: 1728px) {
+  html {
+    font-size: 45px;
+  }
+}
+
+@media (min-width: 1920px) {
   html {
     font-size: 50px;
   }
@@ -33,9 +39,11 @@
   width: auto;
   height: auto;
   z-index: -100;
-  -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.container {
+  height: 100%;
 }
 
 .left-cont {
@@ -87,6 +95,17 @@
   display: inline-block;
 }
 
+.mbd-score-wrap {
+  width: 28rem;
+  height: 15.96rem;
+  overflow-y: auto;
+  position: relative;
+  top: -1rem;
+  left: -1rem;
+  box-sizing: border-box;
+  padding: 1rem 0 0 1rem;
+}
+
 .mbd-score-list .mbd-score-item {
   width: 25.16rem;
   height: 1.65rem;
@@ -95,15 +114,29 @@
   margin-bottom: .22rem;
 }
 
+.mbd-score-list .mbd-score-item:nth-child(odd) .mbd-score-resl {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.mbd-score-list .mbd-score-item:nth-child(even) .mbd-score-resl {
+  background: rgba(0, 0, 0, 0.1);
+  background-blend-mode: darken;
+}
+
+.mbd-score-list .mbd-score-item.show .mbd-score-avatar {
+  animation: avtAmt 800ms ease-in-out both;
+}
+
+.mbd-score-list .mbd-score-item.show .mbd-score-resl {
+  animation: itAmt 1.6s ease-in-out both;
+}
+
 .mbd-score-list .mbd-score-resl {
   height: 100%;
-  background: rgba(0, 0, 0, 0.1);
   font-size: .72rem;
   border-radius: 1.5rem;
   overflow: hidden;
   width: 0;
-  -webkit-animation: itAmt 1.6s ease-in-out both;
-          animation: itAmt 1.6s ease-in-out both;
   position: relative;
   z-index: 5;
 }
@@ -114,14 +147,10 @@
   height: 1.57rem;
   border-radius: 50%;
   overflow: hidden;
-  border: 0.08rem solid rgba(0, 0, 0, 0.2);
+  border: 0.08rem solid rgba(0, 0, 0, 0.3);
   margin-right: .45rem;
   z-index: 10;
-  -webkit-transform: scale(0);
-      -ms-transform: scale(0);
-          transform: scale(0);
-  -webkit-animation: avtAmt 800ms ease-in-out both;
-          animation: avtAmt 800ms ease-in-out both;
+  transform: scale(0);
 }
 
 .mbd-score-list .mbd-score-avatar img {
@@ -140,105 +169,116 @@
 .mbd-score-list .mbd-score-time {
   position: absolute;
   left: 11.6rem;
-  width: 3rem;
   line-height: 1.73rem;
 }
 
 .mbd-score-list .mbd-score-gift {
+  font-family: "Helvetica Bold";
   position: absolute;
   left: 19.2rem;
   line-height: 1.73rem;
 }
 
-.mbd-newest-list .mbd-newest-item {
+.mbd-best-list .mbd-best-item {
   width: 8rem;
   height: 2.62rem;
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 1.5rem;
   position: relative;
   margin-bottom: 1.26rem;
 }
 
-.mbd-newest-list .mbd-newest-avatar {
-  display: inline-block;
-  vertical-align: top;
+.mbd-best-list .mbd-best-avatar {
+  position: absolute;
+  z-index: 10;
   width: 2.92rem;
   height: 2.92rem;
   border-radius: 50%;
   overflow: hidden;
-  border: 0.08rem solid rgba(0, 0, 0, 0.2);
-  margin: -0.15rem 0.6rem 0 0;
+  border: 0.08rem solid rgba(0, 0, 0, 0.3);
+  top: -.15rem;
+  left: -.63rem;
+  transform: scale(0);
+  animation: avtAmt 800ms ease-in-out both;
 }
 
-.mbd-newest-list .mbd-newest-avatar img {
+.mbd-best-list .mbd-best-avatar img {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.mbd-newest-list .mbd-newest-crown {
+.mbd-best-list .mbd-best-props {
   position: absolute;
+}
+
+.mbd-best-list .mbd-best-props.gold, .mbd-best-list .mbd-best-props.silver, .mbd-best-list .mbd-best-props.copper {
   width: 1.97rem;
   height: 1.04rem;
-  background: url("../img/avatar-crown.png") no-repeat;
+  top: -.74rem;
+  left: -.6rem;
+}
+
+.mbd-best-list .mbd-best-props.gold {
+  background: url("../img/props-gold.png") no-repeat;
   background-size: contain;
-  top: -.76rem;
-  left: 0;
 }
 
-.mbd-newest-list .mbd-newest-resl {
-  display: inline-block;
-  vertical-align: top;
+.mbd-best-list .mbd-best-props.silver {
+  background: url("../img/props-silver.png") no-repeat;
+  background-size: contain;
+}
+
+.mbd-best-list .mbd-best-props.copper {
+  background: url("../img/props-copper.png") no-repeat;
+  background-size: contain;
+}
+
+.mbd-best-list .mbd-best-props.air {
+  width: .92rem;
+  height: .84rem;
+  background: url("../img/props-air.png") no-repeat;
+  background-size: contain;
+  transform: translate(0, 0) scale(0);
+  animation: airAmt 1.6s ease-in-out both;
+}
+
+.mbd-best-list .mbd-best-resl {
   color: #fff;
+  line-height: 1.5;
+  height: 100%;
+  z-index: 5;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: rgba(0, 0, 0, 0.15);
+  position: relative;
+  width: 0;
+  animation: itAmt 1.6s ease-in-out both;
 }
 
-.mbd-newest-list .mbd-newest-name {
+.mbd-best-list .mbd-best-name {
+  max-width: 5em;
   font-size: .95rem;
+  position: absolute;
+  top: .18rem;
+  left: 2.92rem;
 }
 
-.mbd-newest-list .mbd-newest-time {
+.mbd-best-list .mbd-best-time {
   font-size: .72rem;
-}
-
-@-webkit-keyframes avtAmt {
-  0% {
-    -webkit-transform: scale(0);
-            transform: scale(0);
-  }
-  90% {
-    -webkit-transform: scale(1.2);
-            transform: scale(1.2);
-  }
-  100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
+  display: block;
+  position: absolute;
+  top: 1.4rem;
+  left: 2.92rem;
 }
 
 @keyframes avtAmt {
   0% {
-    -webkit-transform: scale(0);
-            transform: scale(0);
+    transform: scale(0);
   }
   90% {
-    -webkit-transform: scale(1.2);
-            transform: scale(1.2);
+    transform: scale(1.2);
   }
   100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-}
-
-@-webkit-keyframes itAmt {
-  0%, 60% {
-    width: 0;
-  }
-  85% {
-    width: 110%;
-  }
-  100% {
-    width: 100%;
+    transform: scale(1);
   }
 }
 
@@ -247,9 +287,22 @@
     width: 0;
   }
   85% {
-    width: 110%;
+    width: 105%;
   }
   100% {
     width: 100%;
+  }
+}
+
+@keyframes airAmt {
+  60% {
+    transform: translate(-0.46rem, -0.42rem) scale(1);
+  }
+  80% {
+    transform: translate(-0.92rem, -0.84rem) scale(1.2);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-0.6rem, -0.74rem) scale(1);
   }
 }
