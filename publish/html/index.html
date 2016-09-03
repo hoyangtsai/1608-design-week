@@ -192,27 +192,61 @@ $(function() {
     }
 
     var newestList = $('.mbd-score-list');
-    if ( newestList.children().length > 7 ) {
-      var newest = result[result.length - 1];
+    newestList.empty();
+    for (var i = result.length - 8; i < result.length; i++) {
+      var newest = result[i];
       var li = getNewItem(newest);
-      newestList.children().slice(-1).remove();
       newestList.prepend(li);
-      li.addClass('show');
-    } else if (newestList.children().length + result.length > 7) {
-      var lp = 8 - newestList.children().length;
-      for (var i = result.length - 1; i >= result.length - lp; i--) {
-        var newest = result[i];
-        var li = getNewItem(newest);
-        newestList.prepend(li);
-        li.addClass('show');      }
-    } else {
-      for (var i = result.length - 1; i >= 0; i--) {
-        var newest = result[i];
-        var li = getNewItem(newest);
-        newestList.prepend(li);
+      if (i !== result.length - 1) {
         li.addClass('show');
       }
     }
+    setTimeout(function() {
+      newestList.children().first().addClass('show');
+    }, 1000);
+
+    // if ( newestList.children().length > 7 ) {
+    //   var newest = result[result.length - 1];
+    //   var li = getNewItem(newest);
+    //   newestList.children().slice(-1).remove();
+    //   var repeat = false;
+    //   newestList.children().each(function(index, el) {
+    //     if ($(el).find('.mbd-avatar-img').text() == $(li).find('.mbd-avatar-img').text()) {
+    //       repeat = true;
+    //     }
+    //   });
+    //   if (repeat) return;
+    //   newestList.prepend(li);
+    //   li.addClass('show');
+    // } else if (newestList.children().length + result.length > 7) {
+    //   var lp = 8 - newestList.children().length;
+    //   for (var i = result.length - 1; i >= result.length - lp; i--) {
+    //     var newest = result[i];
+    //     var li = getNewItem(newest);
+    //     newestList.children().each(function(index, el) {
+    //       if ($(el).find('.mbd-avatar-img').text() == $(li).find('.mbd-avatar-img').text()) {
+    //         repeat = true;
+    //       }
+    //     });
+    //     if (repeat) continue;
+    //     newestList.prepend(li);
+    //     li.addClass('show');
+    //   }
+    // } else {
+    //   for (var i = result.length - 1; i >= 0; i--) {
+    //     var newest = result[i];
+    //     var li = getNewItem(newest);
+    //     var repeat = false;
+    //     newestList.children().each(function(index, el) {
+    //       if ($(el).find('.mbd-avatar-img').text() == $(li).find('.mbd-avatar-img').text()) {
+    //         repeat = true;
+    //       }
+    //     });
+    //     if (repeat) continue;
+    //     newestList.prepend(li);
+    //     li.addClass('show');
+    //   }
+    // }
   }
 
   function bestListCb(data) {
@@ -251,21 +285,30 @@ $(function() {
 
     var bestList = $('.mbd-best-list');
     bestList.empty();
-    for (var i = 0; i < 4; i++) {
+
+    for (var i = result.length - 1; i >= result.length; i--) {
+      var repeat = false;
+      bestList.children().each(function(index, el) {
+        if ($(el).find('.mbd-avatar-img').attr('src') == result[i].info) {
+          repeat = true;
+        }
+      });
+      if (repeat) continue;
+      if (bestList.children().length > 4) break;
+
       var best = result[i];
-      var rank = '';
-      if (i == 0) {
-        rank = 'gold'
-      } else if (i == 1) {
-        rank = 'silver'
-      } else if (i == 2) {
-        rank = 'copper'
-      } else if (i == 3) {
-        rank = 'air';
+      var li = '';
+      if (bestList.children().length == 0) {
+        li = getNewItem(best, 'gold');
+      } else if (bestList.children().length == 1) {
+        li = getNewItem(best, 'silver');
+      } else if (bestList.children().length == 2) {
+        li = getNewItem(best, 'copper');
+      } else if (bestList.children().length == 3) {
+        li = getNewItem(best, 'air');
       }
-      var li = getNewItem(best, rank);
       bestList.append(li);
-      if (i < 3) {
+      if (bestList.children().length < 3) {
         li.addClass('show');
       }
     }
@@ -278,12 +321,12 @@ $(function() {
   var newestIntvl = null,
     baseIntvl = null;
   // newest list
-  newestIntvl = setInterval(function() {
-    var method = 'GET';
-    var url = host + 'ajax?rank=true&getAll=true';
-    var type = 'text';
-    AJAX(method, url, true, type, newestListCb, {});
-  }, 5000);
+  // newestIntvl = setInterval(function() {
+  //   var method = 'GET';
+  //   var url = host + 'ajax?rank=true&getAll=true';
+  //   var type = 'text';
+  //   AJAX(method, url, true, type, newestListCb, {});
+  // }, 10000);
 
   // best list
   baseIntvl = setInterval(function() {
@@ -291,7 +334,7 @@ $(function() {
     var url = host + 'ajax?rank=true&order=time';
     var type= 'text';
     AJAX(method, url, true, type, bestListCb, {});
-  }, 5000);
+  }, 3000);
 
 });
 </script>
