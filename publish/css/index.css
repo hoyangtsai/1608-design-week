@@ -6,6 +6,18 @@
   word-wrap: normal;
 }
 
+@media (min-width: 768px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 960px) {
+  html {
+    font-size: 25px;
+  }
+}
+
 @media (min-width: 1152px) {
   html {
     font-size: 30px;
@@ -39,7 +51,9 @@
   width: auto;
   height: auto;
   z-index: -100;
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 .container {
@@ -124,11 +138,13 @@
 }
 
 .mbd-score-list .mbd-score-item.show .mbd-score-avatar {
-  animation: avtAmt 800ms ease-in-out both;
+  -webkit-animation: avtAmt 500ms ease-in-out both;
+          animation: avtAmt 500ms ease-in-out both;
 }
 
 .mbd-score-list .mbd-score-item.show .mbd-score-resl {
-  animation: itAmt 1.6s ease-in-out both;
+  -webkit-animation: itAmt 1.6s ease-in-out both;
+          animation: itAmt 1.6s ease-in-out both;
 }
 
 .mbd-score-list .mbd-score-resl {
@@ -150,7 +166,9 @@
   border: 0.08rem solid rgba(0, 0, 0, 0.3);
   margin-right: .45rem;
   z-index: 10;
-  transform: scale(0);
+  -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+          transform: scale(0);
 }
 
 .mbd-score-list .mbd-score-avatar img {
@@ -186,6 +204,25 @@
   margin-bottom: 1.26rem;
 }
 
+.mbd-best-list .mbd-best-item.show .mbd-best-avatar {
+  -webkit-animation: avtAmt 500ms ease-in-out both;
+          animation: avtAmt 500ms ease-in-out both;
+}
+
+.mbd-best-list .mbd-best-item.show .mbd-best-resl {
+  -webkit-animation: itAmt 1s ease-in-out both;
+          animation: itAmt 1s ease-in-out both;
+}
+
+.mbd-best-list .mbd-best-item.show .mbd-best-props {
+  visibility: visible;
+}
+
+.mbd-best-list .mbd-best-item.show .mbd-best-props.air {
+  -webkit-animation: airAmt 2s ease-out both;
+          animation: airAmt 2s ease-out both;
+}
+
 .mbd-best-list .mbd-best-avatar {
   position: absolute;
   z-index: 10;
@@ -196,8 +233,9 @@
   border: 0.08rem solid rgba(0, 0, 0, 0.3);
   top: -.15rem;
   left: -.63rem;
-  transform: scale(0);
-  animation: avtAmt 800ms ease-in-out both;
+  -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+          transform: scale(0);
 }
 
 .mbd-best-list .mbd-best-avatar img {
@@ -206,8 +244,21 @@
   height: 100%;
 }
 
+.mbd-best-list .mbd-best-resl {
+  color: #fff;
+  line-height: 1.5;
+  height: 100%;
+  z-index: 5;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: rgba(0, 0, 0, 0.15);
+  position: relative;
+  width: 0;
+}
+
 .mbd-best-list .mbd-best-props {
   position: absolute;
+  visibility: hidden;
 }
 
 .mbd-best-list .mbd-best-props.gold, .mbd-best-list .mbd-best-props.silver, .mbd-best-list .mbd-best-props.copper {
@@ -237,21 +288,14 @@
   height: .84rem;
   background: url("../img/props-air.png") no-repeat;
   background-size: contain;
-  transform: translate(0, 0) scale(0);
-  animation: airAmt 1.6s ease-in-out both;
-}
-
-.mbd-best-list .mbd-best-resl {
-  color: #fff;
-  line-height: 1.5;
-  height: 100%;
-  z-index: 5;
-  overflow: hidden;
-  border-radius: 1.5rem;
-  background: rgba(0, 0, 0, 0.15);
-  position: relative;
-  width: 0;
-  animation: itAmt 1.6s ease-in-out both;
+  -webkit-transform-origin: center center;
+      -ms-transform-origin: center center;
+          transform-origin: center center;
+  -webkit-transform: translate(0.2rem, 0.2rem) scale(1) rotate(0);
+      -ms-transform: translate(0.2rem, 0.2rem) scale(1) rotate(0);
+          transform: translate(0.2rem, 0.2rem) scale(1) rotate(0);
+  opacity: 1;
+  z-index: 9;
 }
 
 .mbd-best-list .mbd-best-name {
@@ -270,39 +314,182 @@
   left: 2.92rem;
 }
 
-@keyframes avtAmt {
+@-webkit-keyframes avtAmt {
   0% {
-    transform: scale(0);
+    -webkit-transform: scale(0.2);
+            transform: scale(0.2);
   }
-  90% {
-    transform: scale(1.2);
+  50% {
+    -webkit-transform: scale(1.6);
+            transform: scale(1.6);
   }
   100% {
-    transform: scale(1);
+    -webkit-transform: scale(1);
+            transform: scale(1);
   }
 }
 
-@keyframes itAmt {
-  0%, 60% {
+@keyframes avtAmt {
+  0% {
+    -webkit-transform: scale(0.2);
+            transform: scale(0.2);
+  }
+  50% {
+    -webkit-transform: scale(1.6);
+            transform: scale(1.6);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@-webkit-keyframes itAmt {
+  0%, 50% {
     width: 0;
   }
-  85% {
-    width: 105%;
+  60% {
+    width: 120%;
   }
   100% {
     width: 100%;
   }
 }
 
-@keyframes airAmt {
-  60% {
-    transform: translate(-0.46rem, -0.42rem) scale(1);
+@keyframes itAmt {
+  0%, 50% {
+    width: 0;
   }
-  80% {
-    transform: translate(-0.92rem, -0.84rem) scale(1.2);
-    opacity: 0.5;
+  60% {
+    width: 120%;
   }
   100% {
-    transform: translate(-0.6rem, -0.74rem) scale(1);
+    width: 100%;
+  }
+}
+
+@-webkit-keyframes airAmt {
+  0%, 40% {
+    -webkit-transform: translate(0.2rem, 0.2rem) scale(1) rotate(0);
+            transform: translate(0.2rem, 0.2rem) scale(1) rotate(0);
+    opacity: 1;
+  }
+  44% {
+    -webkit-transform: translate(-1.2rem, -1.2rem) scale(1.6) rotate(0);
+            transform: translate(-1.2rem, -1.2rem) scale(1.6) rotate(0);
+    opacity: 1;
+  }
+  47% {
+    -webkit-transform: translate(-1.2rem, -1.2rem) scale(1.6) rotate(11deg);
+            transform: translate(-1.2rem, -1.2rem) scale(1.6) rotate(11deg);
+    opacity: 1;
+  }
+  54% {
+    -webkit-transform: translate(-1.35rem, -1.35rem) scale(1.8) rotate(-12deg);
+            transform: translate(-1.35rem, -1.35rem) scale(1.8) rotate(-12deg);
+    opacity: .85;
+  }
+  57% {
+    -webkit-transform: translate(-1.35rem, -1.35rem) scale(1.9) rotate(11deg);
+            transform: translate(-1.35rem, -1.35rem) scale(1.9) rotate(11deg);
+    opacity: .77;
+  }
+  64% {
+    -webkit-transform: translate(-1.45rem, -1.45rem) scale(2.2) rotate(-12deg);
+            transform: translate(-1.45rem, -1.45rem) scale(2.2) rotate(-12deg);
+    opacity: .62;
+  }
+  71% {
+    -webkit-transform: translate(-1.55rem, -1.55rem) scale(2.4) rotate(11deg);
+            transform: translate(-1.55rem, -1.55rem) scale(2.4) rotate(11deg);
+    opacity: .46;
+  }
+  78% {
+    -webkit-transform: translate(-1.65rem, -1.65rem) scale(2.4) rotate(-12deg);
+            transform: translate(-1.65rem, -1.65rem) scale(2.4) rotate(-12deg);
+    opacity: .31;
+  }
+  85% {
+    -webkit-transform: translate(-1.75rem, -1.75rem) scale(2.8) rotate(11deg);
+            transform: translate(-1.75rem, -1.75rem) scale(2.8) rotate(11deg);
+    opacity: .15;
+  }
+  92% {
+    -webkit-transform: translate(-1.8rem, -1.8rem) scale(3) rotate(-12deg);
+            transform: translate(-1.8rem, -1.8rem) scale(3) rotate(-12deg);
+    opacity: 0;
+  }
+  95% {
+    -webkit-transform: translate(0.2rem, 0.2rem) scale(1) rotate(0);
+            transform: translate(0.2rem, 0.2rem) scale(1) rotate(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translate(-0.7rem, -0.7rem) scale(1) rotate(0);
+            transform: translate(-0.7rem, -0.7rem) scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes airAmt {
+  0%, 40% {
+    -webkit-transform: translate(0.2rem, 0.2rem) scale(1) rotate(0);
+            transform: translate(0.2rem, 0.2rem) scale(1) rotate(0);
+    opacity: 1;
+  }
+  44% {
+    -webkit-transform: translate(-1.2rem, -1.2rem) scale(1.6) rotate(0);
+            transform: translate(-1.2rem, -1.2rem) scale(1.6) rotate(0);
+    opacity: 1;
+  }
+  47% {
+    -webkit-transform: translate(-1.2rem, -1.2rem) scale(1.6) rotate(11deg);
+            transform: translate(-1.2rem, -1.2rem) scale(1.6) rotate(11deg);
+    opacity: 1;
+  }
+  54% {
+    -webkit-transform: translate(-1.35rem, -1.35rem) scale(1.8) rotate(-12deg);
+            transform: translate(-1.35rem, -1.35rem) scale(1.8) rotate(-12deg);
+    opacity: .85;
+  }
+  57% {
+    -webkit-transform: translate(-1.35rem, -1.35rem) scale(1.9) rotate(11deg);
+            transform: translate(-1.35rem, -1.35rem) scale(1.9) rotate(11deg);
+    opacity: .77;
+  }
+  64% {
+    -webkit-transform: translate(-1.45rem, -1.45rem) scale(2.2) rotate(-12deg);
+            transform: translate(-1.45rem, -1.45rem) scale(2.2) rotate(-12deg);
+    opacity: .62;
+  }
+  71% {
+    -webkit-transform: translate(-1.55rem, -1.55rem) scale(2.4) rotate(11deg);
+            transform: translate(-1.55rem, -1.55rem) scale(2.4) rotate(11deg);
+    opacity: .46;
+  }
+  78% {
+    -webkit-transform: translate(-1.65rem, -1.65rem) scale(2.4) rotate(-12deg);
+            transform: translate(-1.65rem, -1.65rem) scale(2.4) rotate(-12deg);
+    opacity: .31;
+  }
+  85% {
+    -webkit-transform: translate(-1.75rem, -1.75rem) scale(2.8) rotate(11deg);
+            transform: translate(-1.75rem, -1.75rem) scale(2.8) rotate(11deg);
+    opacity: .15;
+  }
+  92% {
+    -webkit-transform: translate(-1.8rem, -1.8rem) scale(3) rotate(-12deg);
+            transform: translate(-1.8rem, -1.8rem) scale(3) rotate(-12deg);
+    opacity: 0;
+  }
+  95% {
+    -webkit-transform: translate(0.2rem, 0.2rem) scale(1) rotate(0);
+            transform: translate(0.2rem, 0.2rem) scale(1) rotate(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translate(-0.7rem, -0.7rem) scale(1) rotate(0);
+            transform: translate(-0.7rem, -0.7rem) scale(1) rotate(0);
+    opacity: 1;
   }
 }

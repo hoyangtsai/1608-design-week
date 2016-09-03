@@ -2,6 +2,16 @@
 
 // original - 3840 * 2160 (16:9)
 
+@media (min-width: 768px) {
+  html {
+    font-size: 20px;
+  }
+}
+@media (min-width: 960px) {
+  html {
+    font-size: 25px;
+  }
+}
 @media (min-width: 1152px) {
   html {
     font-size: 30px;
@@ -121,7 +131,7 @@
     }
     &.show {
       .mbd-score-avatar {
-        animation: avtAmt 800ms ease-in-out both;
+        animation: avtAmt 500ms ease-in-out both;
       }
       .mbd-score-resl {
         animation: itAmt 1.6s ease-in-out both;
@@ -186,7 +196,23 @@
     height: 2.62rem;
     position: relative;
     margin-bottom: 1.26rem;
+
+    &.show {
+      .mbd-best-avatar {
+        animation: avtAmt 500ms ease-in-out both;
+      }
+      .mbd-best-resl {
+        animation: itAmt 1s ease-in-out both;
+      }
+      .mbd-best-props {
+        visibility: visible;
+        &.air {
+          animation: airAmt 2s ease-out both;
+        }
+      }
+    }
   }
+
   .mbd-best-avatar {
     position: absolute;
     z-index: 10;
@@ -198,7 +224,6 @@
     top: -.15rem;
     left: -.63rem;
     transform: scale(0);
-    animation: avtAmt 800ms ease-in-out both;
     img {
       display: block;
       width: 100%;
@@ -206,8 +231,21 @@
     }
   }
 
+  .mbd-best-resl {
+    color: #fff;
+    line-height: 1.5;
+    height: 100%;
+    z-index: 5;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    background: rgba(0, 0, 0, 0.15);
+    position: relative;
+    width: 0;
+  }
+
   .mbd-best-props {
     position: absolute;
+    visibility: hidden;
     &.gold, &.silver, &.copper {
       width: 1.97rem;
       height: 1.04rem;
@@ -231,24 +269,11 @@
       height: .84rem;
       background: url("../img/props-air.png") no-repeat;
       background-size: contain;
-      // top: -.74rem;
-      // left: -.6rem;
-      transform: translate(0, 0) scale(0);
-      animation: airAmt 1.6s ease-in-out both;
+      transform-origin: center center;
+      transform: translate(.2rem, .2rem) scale(1) rotate(0);
+      opacity: 1;
+      z-index: 9;
     }
-  }
-
-  .mbd-best-resl {
-    color: #fff;
-    line-height: 1.5;
-    height: 100%;
-    z-index: 5;
-    overflow: hidden;
-    border-radius: 1.5rem;
-    background: rgba(0, 0, 0, 0.15);
-    position: relative;
-    width: 0;
-    animation: itAmt 1.6s ease-in-out both;
   }
 
   .mbd-best-name {
@@ -271,10 +296,10 @@
 
 @keyframes avtAmt {
   0% {
-    transform: scale(0);
+    transform: scale(.2);
   }
-  90% {
-    transform: scale(1.2);
+  50% {
+    transform: scale(1.6);
   }
   100% {
     transform: scale(1);
@@ -282,11 +307,11 @@
 }
 
 @keyframes itAmt {
-  0%, 60% {
+  0%, 50% {
     width: 0;
   }
-  85% {
-    width: 105%;
+  60% {
+    width: 120%;
   }
   100% {
     width: 100%;
@@ -294,14 +319,52 @@
 }
 
 @keyframes airAmt {
-  60% {
-    transform: translate(-.46rem, -.42rem) scale(1);
+  0%, 40% {
+    transform: translate(.2rem, .2rem) scale(1) rotate(0);
+    opacity: 1;
   }
-  80% {
-    transform: translate(-.92rem, -.84rem) scale(1.2);
-    opacity: (.5);
+  44% {
+    transform: translate(-1.2rem, -1.2rem) scale(1.6) rotate(0);
+    opacity: 1;
+  }
+  47% {
+    transform: translate(-1.2rem, -1.2rem) scale(1.6) rotate(11deg);
+    opacity: 1;
+  }
+  54% {
+    transform: translate(-1.35rem, -1.35rem) scale(1.8) rotate(-12deg);
+    opacity: .85;
+  }
+  57% {
+    transform: translate(-1.35rem, -1.35rem) scale(1.9) rotate(11deg);
+    opacity: .77;
+  }
+  64% {
+    transform: translate(-1.45rem, -1.45rem) scale(2.2) rotate(-12deg);
+    opacity: .62;
+  }
+  71% {
+    transform: translate(-1.55rem, -1.55rem) scale(2.4) rotate(11deg);
+    opacity: .46;
+  }
+  78% {
+    transform: translate(-1.65rem, -1.65rem) scale(2.4) rotate(-12deg);
+    opacity: .31;
+  }
+  85% {
+    transform: translate(-1.75rem, -1.75rem) scale(2.8) rotate(11deg);
+    opacity: .15;
+  }
+  92% {
+    transform: translate(-1.8rem, -1.8rem) scale(3) rotate(-12deg);
+    opacity: 0;
+  }
+  95% {
+    transform: translate(.2rem, .2rem) scale(1) rotate(0);
+    opacity: 1;
   }
   100% {
-    transform: translate(-.6rem, -.74rem) scale(1);
+    transform: translate(-.7rem, -.7rem) scale(1) rotate(0);
+    opacity: 1;
   }
 }

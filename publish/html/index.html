@@ -27,7 +27,7 @@
     </div>
     <div class="mbd-score-wrap">
       <ul class="mbd-score-list">
-        <li class="mbd-score-item">
+        <!-- <li class="mbd-score-item">
           <div class="mbd-score-avatar">
             <img src="http://wx.qlogo.cn/mmopen/ajNVdqHZLLDFVzZGAiatZQIickC2RKVBrgz141c8c8dkeNUmrsUHH7BDR4Qj1qPnibBl7TuTSaE9YWYnuYIwxSlULj2Yey9ajOCgIWfTaia0OcM/0" alt="Unicorn" class="mbd-avatar-img">
           </div><div class="mbd-score-resl">
@@ -35,7 +35,7 @@
             <span class="mbd-score-time">30分钟</span>
             <span class="mbd-score-gift">抱枕1个&nbsp;<b class="status">未认领</b></span>
           </div>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
@@ -74,7 +74,7 @@
           <b class="mbd-best-time">26分钟</b>
         </div>
       </li> -->
-      <li class="mbd-best-item">
+      <!-- <li class="mbd-best-item">
         <span class="mbd-best-props air"></span>
         <div class="mbd-best-avatar">
           <img src="http://wx.qlogo.cn/mmopen/ajNVdqHZLLDFVzZGAiatZQIickC2RKVBrgz141c8c8dkeNUmrsUHH7BDR4Qj1qPnibBl7TuTSaE9YWYnuYIwxSlULj2Yey9ajOCgIWfTaia0OcM/0" alt="Unicorn" class="mbd-avatar-img">
@@ -82,7 +82,7 @@
           <p class="mbd-best-name">Kikizhugdd</p>
           <b class="mbd-best-time">26分钟</b>
         </div>
-      </li>
+      </li> -->
     </ul>
   </div>
 </div>
@@ -136,67 +136,163 @@ $(function() {
     }
   }
 
-  function newestListCb(data) {
-    var result = JSON.parse(data);
-    console.log(result);
-
-    var now = Math.floor(Date.now() / 1000);
-
-    var newest = result[result.length - 1];
-    var time = timeSince(now - newest.time);
-
-    var li = $('<li />', {class: 'mbd-score-item'});
-    var imgDiv = $('<div />', {class: 'mbd-score-avatar'});
-    var reslDiv = $('<div />', {class: 'mbd-score-resl'});
-
-    $('<img/>', {
-      class: 'mbd-avatar-img',
-      alt: newest.uid,
-      src: newest.info
-    }).appendTo(imgDiv)
-
-    $('<b />', {
-      class: 'mbd-score-name',
-      text: newest.uid
-    }).appendTo(reslDiv)
-    $('<span />', {
-      class: 'mbd-score-time',
-      text: time
-    }).appendTo(reslDiv)
-    $('<span />', {
-      class: 'mbd-score-gift',
-      text: newest.gift + ' '
-    }).append($('<b />', {
-      class: 'status',
-      text: newest.ifUsed == 0 ? '未认领' : '已认领'
-    })).appendTo(reslDiv)
-
-    li.append(imgDiv).append(reslDiv);
-
-    if ($('.mbd-score-list').children().length > 7) {
-      $('.mbd-score-list').children().slice(-1).remove();
+  function toReadableTime(ms) {
+    if (!ms) return;
+    var time = new Date(parseInt(ms));
+    var seconds = parseInt(ms / 1000);
+    if(seconds < 60){
+      return time.getSeconds() + '秒';
     }
-    $('.mbd-score-list').prepend(li);
-    li.addClass('show');
+    if(seconds < 3600){
+      return time.getMinutes() + '分钟' + time.getSeconds() + '秒';
+    }
+    if(seconds <= 86400){
+      return time.getHours() + '小时' + time.getMinutes() + '分';
+    }
   }
 
-  var method,
-    url = '//mxd.tencent.com/weixin/160818-mbd/server/',
-    data,
-    type,
-    callback;
+  function newestListCb(data) {
+    var result = JSON.parse(data);
 
-  // setInterval(function() {
-  //   method = 'GET';
-  //   url += 'ajax?rank=true&getAll=true&order=time';
-  //   type= 'text';
-  //   AJAX(method, url, true, type, newestListCb, data);
-  // }, 3000);
+    var getNewItem = function(newest) {
+      var time = toReadableTime(newest.time);
 
-  // var worker = new Worker('../js/score_task.js');
-  // worker.addEventListener('message', function(e){
-  // }, false);
-  // worker.postMessage('start');
+      var li = $('<li />', {class: 'mbd-score-item'});
+      var imgDiv = $('<div />', {class: 'mbd-score-avatar'});
+      var reslDiv = $('<div />', {class: 'mbd-score-resl'});
+
+      var imgScr = 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==';
+      if (newest.info && newest.info != 'NULL' && newest.info != '') {
+        imgScr = decodeURI(newest.info);
+      }
+      $('<img/>', {
+        class: 'mbd-avatar-img',
+        alt: newest.name,
+        src: imgScr
+      }).appendTo(imgDiv)
+
+      $('<b />', {
+        class: 'mbd-score-name',
+        text: newest.name
+      }).appendTo(reslDiv)
+      $('<span />', {
+        class: 'mbd-score-time',
+        text: time
+      }).appendTo(reslDiv)
+      $('<span />', {
+        class: 'mbd-score-gift',
+        text: newest.gift + ' '
+      }).append($('<b />', {
+        class: 'status',
+        text: newest.ifUsed == 0 ? '未认领' : '已认领'
+      })).appendTo(reslDiv)
+
+      li.append(imgDiv).append(reslDiv);
+      return li;
+    }
+
+    var newestList = $('.mbd-score-list');
+    if ( newestList.children().length > 7 ) {
+      var newest = result[result.length - 1];
+      var li = getNewItem(newest);
+      newestList.children().slice(-1).remove();
+      newestList.prepend(li);
+      li.addClass('show');
+    } else if (newestList.children().length + result.length > 7) {
+      var lp = 8 - newestList.children().length;
+      for (var i = result.length - 1; i >= result.length - lp; i--) {
+        var newest = result[i];
+        var li = getNewItem(newest);
+        newestList.prepend(li);
+        li.addClass('show');      }
+    } else {
+      for (var i = result.length - 1; i >= 0; i--) {
+        var newest = result[i];
+        var li = getNewItem(newest);
+        newestList.prepend(li);
+        li.addClass('show');
+      }
+    }
+  }
+
+  function bestListCb(data) {
+    var result = JSON.parse(data);
+
+    var getNewItem = function(best, rank) {
+      var time = toReadableTime(best.time);
+      var li = $('<li />', {class: 'mbd-best-item'});
+      var imgDiv = $('<div />', {class: 'mbd-best-avatar'});
+      var reslDiv = $('<div />', {class: 'mbd-best-resl'});
+      var spanProps = $('<div />', { class: 'mbd-best-props ' + rank});
+
+      var imgScr = 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==';
+      if (best.info && best.info != 'NULL' && best.info != '') {
+        imgScr = decodeURI(best.info);
+      }
+
+      $('<img/>', {
+        class: 'mbd-avatar-img',
+        alt: best.name,
+        src: imgScr
+      }).appendTo(imgDiv)
+
+      $('<p />', {
+        class: 'mbd-best-name',
+        text: best.name
+      }).appendTo(reslDiv)
+      $('<b />', {
+        class: 'mbd-best-time',
+        text: time
+      }).appendTo(reslDiv)
+
+      li.append(spanProps).append(imgDiv).append(reslDiv);
+      return li;
+    }
+
+    var bestList = $('.mbd-best-list');
+    bestList.empty();
+    for (var i = 0; i < 4; i++) {
+      var best = result[i];
+      var rank = '';
+      if (i == 0) {
+        rank = 'gold'
+      } else if (i == 1) {
+        rank = 'silver'
+      } else if (i == 2) {
+        rank = 'copper'
+      } else if (i == 3) {
+        rank = 'air';
+      }
+      var li = getNewItem(best, rank);
+      bestList.append(li);
+      if (i < 3) {
+        li.addClass('show');
+      }
+    }
+    setTimeout(function() {
+      bestList.children().last().addClass('show');
+    }, 1000);
+  }
+
+  var host = '//mxd.tencent.com/weixin/160818-mbd/server/';
+  var newestIntvl = null,
+    baseIntvl = null;
+  // newest list
+  newestIntvl = setInterval(function() {
+    var method = 'GET';
+    var url = host + 'ajax?rank=true&getAll=true';
+    var type = 'text';
+    AJAX(method, url, true, type, newestListCb, {});
+  }, 5000);
+
+  // best list
+  baseIntvl = setInterval(function() {
+    var method = 'GET';
+    var url = host + 'ajax?rank=true&order=time';
+    var type= 'text';
+    AJAX(method, url, true, type, bestListCb, {});
+  }, 5000);
+
 });
 </script>
 </body>
