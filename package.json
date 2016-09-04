@@ -4,7 +4,8 @@
   "description": "MXD 2016 Desgin Week",
   "main": "fis-conf.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "screen": "upload() { for f in $*;do find $f -type f -exec curl -i -X POST -H Content-Type=multipart/form-data -F file=@{} -F to=/data/vhost_data/wsd.tencent.com/weixin/160818-mbd/{} -F token=160818___Abc http://mxd.tencent.com/weixin/wei46965994453261994long/receiver.php \\; ; done ; };upload ./screen"
   },
   "author": "keithytsai",
   "license": "ISC",

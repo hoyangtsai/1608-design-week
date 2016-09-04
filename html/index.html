@@ -17,8 +17,6 @@
   <source src="../img/bg.mp4" type="video/mp4">
 </video>
 
-
-
 <div class="container">
   <div class="left-cont">
     <div class="title-wrap">
@@ -27,15 +25,6 @@
     </div>
     <div class="mbd-score-wrap">
       <ul class="mbd-score-list">
-        <!-- <li class="mbd-score-item">
-          <div class="mbd-score-avatar">
-            <img src="http://wx.qlogo.cn/mmopen/ajNVdqHZLLDFVzZGAiatZQIickC2RKVBrgz141c8c8dkeNUmrsUHH7BDR4Qj1qPnibBl7TuTSaE9YWYnuYIwxSlULj2Yey9ajOCgIWfTaia0OcM/0" alt="Unicorn" class="mbd-avatar-img">
-          </div><div class="mbd-score-resl">
-            <b class="mbd-score-name">Unicorn</b>
-            <span class="mbd-score-time">30分钟</span>
-            <span class="mbd-score-gift">抱枕1个&nbsp;<b class="status">未认领</b></span>
-          </div>
-        </li> -->
       </ul>
     </div>
   </div>
@@ -44,45 +33,7 @@
     <div class="title-wrap">
       <p class="title-latest-onbaord">最新上榜</p>
     </div>
-
     <ul class="mbd-best-list">
-      <!-- <li class="mbd-best-item">
-        <span class="mbd-best-props gold"></span>
-        <div class="mbd-best-avatar">
-          <img src="http://wx.qlogo.cn/mmopen/ajNVdqHZLLDFVzZGAiatZQIickC2RKVBrgz141c8c8dkeNUmrsUHH7BDR4Qj1qPnibBl7TuTSaE9YWYnuYIwxSlULj2Yey9ajOCgIWfTaia0OcM/0" alt="Unicorn" class="mbd-avatar-img">
-        </div><div class="mbd-best-resl">
-          <p class="mbd-best-name">Kikizhu</p>
-          <b class="mbd-best-time">26分钟</b>
-        </div>
-      </li>
-      <li class="mbd-best-item">
-        <span class="mbd-best-props silver"></span>
-        <div class="mbd-best-avatar">
-          <img src="http://wx.qlogo.cn/mmopen/ajNVdqHZLLDFVzZGAiatZQIickC2RKVBrgz141c8c8dkeNUmrsUHH7BDR4Qj1qPnibBl7TuTSaE9YWYnuYIwxSlULj2Yey9ajOCgIWfTaia0OcM/0" alt="Unicorn" class="mbd-avatar-img">
-        </div><div class="mbd-best-resl">
-          <p class="mbd-best-name">Kikizhu</p>
-          <b class="mbd-best-time">26分钟</b>
-        </div>
-      </li>
-
-      <li class="mbd-best-item">
-        <span class="mbd-best-props copper"></span>
-        <div class="mbd-best-avatar">
-          <img src="http://wx.qlogo.cn/mmopen/ajNVdqHZLLDFVzZGAiatZQIickC2RKVBrgz141c8c8dkeNUmrsUHH7BDR4Qj1qPnibBl7TuTSaE9YWYnuYIwxSlULj2Yey9ajOCgIWfTaia0OcM/0" alt="Unicorn" class="mbd-avatar-img">
-        </div><div class="mbd-best-resl">
-          <p class="mbd-best-name">Kikizhu</p>
-          <b class="mbd-best-time">26分钟</b>
-        </div>
-      </li> -->
-      <!-- <li class="mbd-best-item">
-        <span class="mbd-best-props air"></span>
-        <div class="mbd-best-avatar">
-          <img src="http://wx.qlogo.cn/mmopen/ajNVdqHZLLDFVzZGAiatZQIickC2RKVBrgz141c8c8dkeNUmrsUHH7BDR4Qj1qPnibBl7TuTSaE9YWYnuYIwxSlULj2Yey9ajOCgIWfTaia0OcM/0" alt="Unicorn" class="mbd-avatar-img">
-        </div><div class="mbd-best-resl">
-          <p class="mbd-best-name">Kikizhugdd</p>
-          <b class="mbd-best-time">26分钟</b>
-        </div>
-      </li> -->
     </ul>
   </div>
 </div>
@@ -117,9 +68,11 @@ $(function() {
     $(el).addClass('show');
   });
 
-  function timeSince(seconds) {
+  function toReadableTime(ms) {
+    if (!ms) return;
+    var seconds = parseInt(ms / 1000);
     if(seconds < 60){
-      return parseInt(seconds) + '秒';
+      return seconds + '秒';
     }
     if(seconds < 3600){
       return parseInt(seconds/60) + '分钟' + parseInt(seconds%60) + '秒';
@@ -128,26 +81,7 @@ $(function() {
       return parseInt(seconds/3600) + '小时' + parseInt((seconds%3600)/60) + '分';
     }
     if(seconds > 86400){
-      var date = new Date(seconds * 1000);
-      var day = date.getDate();
-      var month = date.toDateString().match(/[a-zA-Z]*/)[0].replace(" ","");
-      var year = date.getFullYear() == now.getFullYear() ? "" :  " " + date.getFullYear();
-      return day + " " + month + year;
-    }
-  }
-
-  function toReadableTime(ms) {
-    if (!ms) return;
-    var time = new Date(parseInt(ms));
-    var seconds = parseInt(ms / 1000);
-    if(seconds < 60){
-      return time.getSeconds() + '秒';
-    }
-    if(seconds < 3600){
-      return time.getMinutes() + '分钟' + time.getSeconds() + '秒';
-    }
-    if(seconds <= 86400){
-      return time.getHours() + '小时' + time.getMinutes() + '分';
+      return parseInt(seconds/86400) + '天' + parseInt((seconds%86400)/3600) + '小时';
     }
   }
 
@@ -167,13 +101,13 @@ $(function() {
       }
       $('<img/>', {
         class: 'mbd-avatar-img',
-        alt: newest.name,
+        alt: decodeURIComponent(newest.name),
         src: imgScr
       }).appendTo(imgDiv)
 
       $('<b />', {
         class: 'mbd-score-name',
-        text: newest.name
+        text: decodeURIComponent(newest.name)
       }).appendTo(reslDiv)
       $('<span />', {
         class: 'mbd-score-time',
@@ -193,7 +127,7 @@ $(function() {
 
     var newestList = $('.mbd-score-list');
     newestList.empty();
-    for (var i = result.length - 8; i < result.length; i++) {
+    for (var i = result.length - 10; i < result.length; i++) {
       var newest = result[i];
       var li = getNewItem(newest);
       newestList.prepend(li);
@@ -204,53 +138,11 @@ $(function() {
     setTimeout(function() {
       newestList.children().first().addClass('show');
     }, 1000);
-
-    // if ( newestList.children().length > 7 ) {
-    //   var newest = result[result.length - 1];
-    //   var li = getNewItem(newest);
-    //   newestList.children().slice(-1).remove();
-    //   var repeat = false;
-    //   newestList.children().each(function(index, el) {
-    //     if ($(el).find('.mbd-avatar-img').text() == $(li).find('.mbd-avatar-img').text()) {
-    //       repeat = true;
-    //     }
-    //   });
-    //   if (repeat) return;
-    //   newestList.prepend(li);
-    //   li.addClass('show');
-    // } else if (newestList.children().length + result.length > 7) {
-    //   var lp = 8 - newestList.children().length;
-    //   for (var i = result.length - 1; i >= result.length - lp; i--) {
-    //     var newest = result[i];
-    //     var li = getNewItem(newest);
-    //     newestList.children().each(function(index, el) {
-    //       if ($(el).find('.mbd-avatar-img').text() == $(li).find('.mbd-avatar-img').text()) {
-    //         repeat = true;
-    //       }
-    //     });
-    //     if (repeat) continue;
-    //     newestList.prepend(li);
-    //     li.addClass('show');
-    //   }
-    // } else {
-    //   for (var i = result.length - 1; i >= 0; i--) {
-    //     var newest = result[i];
-    //     var li = getNewItem(newest);
-    //     var repeat = false;
-    //     newestList.children().each(function(index, el) {
-    //       if ($(el).find('.mbd-avatar-img').text() == $(li).find('.mbd-avatar-img').text()) {
-    //         repeat = true;
-    //       }
-    //     });
-    //     if (repeat) continue;
-    //     newestList.prepend(li);
-    //     li.addClass('show');
-    //   }
-    // }
   }
 
   function bestListCb(data) {
     var result = JSON.parse(data);
+    console.log(result);
 
     var getNewItem = function(best, rank) {
       var time = toReadableTime(best.time);
@@ -266,13 +158,13 @@ $(function() {
 
       $('<img/>', {
         class: 'mbd-avatar-img',
-        alt: best.name,
+        alt: decodeURIComponent(best.name),
         src: imgScr
       }).appendTo(imgDiv)
 
       $('<p />', {
         class: 'mbd-best-name',
-        text: best.name
+        text: decodeURIComponent(best.name)
       }).appendTo(reslDiv)
       $('<b />', {
         class: 'mbd-best-time',
@@ -286,9 +178,12 @@ $(function() {
     var bestList = $('.mbd-best-list');
     bestList.empty();
 
-    for (var i = result.length - 1; i >= result.length; i--) {
+    for (var i = result.length - 1; i >= 0; i--) {
+      console.log(2);
       var repeat = false;
+      console.log(bestList.children());
       bestList.children().each(function(index, el) {
+        console.log(el);
         if ($(el).find('.mbd-avatar-img').attr('src') == result[i].info) {
           repeat = true;
         }
@@ -308,7 +203,7 @@ $(function() {
         li = getNewItem(best, 'air');
       }
       bestList.append(li);
-      if (bestList.children().length < 3) {
+      if ($('.mbd-best-list').children().length < 4) {
         li.addClass('show');
       }
     }
@@ -321,12 +216,12 @@ $(function() {
   var newestIntvl = null,
     baseIntvl = null;
   // newest list
-  // newestIntvl = setInterval(function() {
-  //   var method = 'GET';
-  //   var url = host + 'ajax?rank=true&getAll=true';
-  //   var type = 'text';
-  //   AJAX(method, url, true, type, newestListCb, {});
-  // }, 10000);
+  newestIntvl = setInterval(function() {
+    var method = 'GET';
+    var url = host + 'ajax?rank=true&getAll=true';
+    var type = 'text';
+    AJAX(method, url, true, type, newestListCb, {});
+  }, 20000);
 
   // best list
   baseIntvl = setInterval(function() {
@@ -334,7 +229,7 @@ $(function() {
     var url = host + 'ajax?rank=true&order=time';
     var type= 'text';
     AJAX(method, url, true, type, bestListCb, {});
-  }, 3000);
+  }, 20000);
 
 });
 </script>

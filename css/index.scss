@@ -101,8 +101,7 @@
 
 .mbd-score-wrap {
   width: 28rem;
-  height: (1.87rem * 8) + 1rem;
-  overflow-y: auto;
+  height: (1.87rem * 10) + 1rem;
 
   position: relative;
   top: -1rem;
@@ -192,7 +191,7 @@
 .mbd-best-list {
 
   .mbd-best-item {
-    width: 8rem;
+    width: 10rem;
     height: 2.62rem;
     position: relative;
     margin-bottom: 1.26rem;
@@ -277,7 +276,7 @@
   }
 
   .mbd-best-name {
-    max-width: 5em;
+    max-width: 8em;
     font-size: .95rem;
     @extend %text-overflow;
     position: absolute;
@@ -307,15 +306,12 @@
 }
 
 @keyframes itAmt {
-  0%, 50% {
-    width: 0;
-  }
-  60% {
-    width: 120%;
-  }
-  100% {
-    width: 100%;
-  }
+  0%, 60% { width: 0; }
+  70% { width: 60%; }
+  80% { width: 80%; }
+  85% { width: 100%; }
+  90% { width: 115%; }
+  100% { width: 100%; }
 }
 
 @keyframes airAmt {
