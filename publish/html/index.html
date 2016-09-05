@@ -142,7 +142,10 @@ $(function() {
 
   function bestListCb(data) {
     var result = JSON.parse(data);
-    console.log(result);
+
+    result.sort(function(a, b){
+      return a.time - b.time;
+    });
 
     var getNewItem = function(best, rank) {
       var time = toReadableTime(best.time);
@@ -178,12 +181,10 @@ $(function() {
     var bestList = $('.mbd-best-list');
     bestList.empty();
 
-    for (var i = result.length - 1; i >= 0; i--) {
-      console.log(2);
+    for (var i = 0, j = result.length; i < j; i++) {
+      if (result[i].time < 0) continue;
       var repeat = false;
-      console.log(bestList.children());
       bestList.children().each(function(index, el) {
-        console.log(el);
         if ($(el).find('.mbd-avatar-img').attr('src') == result[i].info) {
           repeat = true;
         }
@@ -213,8 +214,7 @@ $(function() {
   }
 
   var host = '//mxd.tencent.com/weixin/160818-mbd/server/';
-  var newestIntvl = null,
-    baseIntvl = null;
+  var newestIntvl = null, baseIntvl = null;
   // newest list
   newestIntvl = setInterval(function() {
     var method = 'GET';
