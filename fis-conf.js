@@ -84,7 +84,7 @@ fis.match('**', {
         //px2rem: 16,  // 是否使用rem单位
         styleReg: /(<style(?:(?=\s)[\s\S]*?["'\s\w\/\-]>|>))([\s\S]*?)(<\/style\s*>|$)/ig
     }),
-    postpackager: [fis.plugin('list-html'), fis.plugin('open', {
+    postpackager: [ /* fis.plugin('list-html'),*/ fis.plugin('open', {
         baseUrl: atmConf.wapstatic + atmConf.userName + '/' + atmConf.projectName
     })]
 });
